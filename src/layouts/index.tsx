@@ -9,14 +9,14 @@ export default function Layout() {
         <Button
           type="primary"
           onClick={() => {
-            native.getUserToken();
-            const isMobile =
-              window.cashbagSdk?.isAndroid?.() || window.cashbagSdk?.isIOS?.();
-            if (isMobile && typeof window.sdkHandler !== 'undefined') {
-              window.sdkHandler.sendUserAuthorization = function (data) {
-                console.log('sendUserAuthorization: ', data);
-              };
-            }
+            console.log('cashbagSdk: ', window.cashbagSdk);
+            // const isMobile =
+            //   window.cashbagSdk?.isAndroid?.() || window.cashbagSdk?.isIOS?.();
+            // if (isMobile && typeof window.sdkHandler !== 'undefined') {
+            //   window.sdkHandler.sendUserAuthorization = function (data) {
+            //     console.log('sendUserAuthorization: ', data);
+            //   };
+            // }
           }}
         >
           get_user_token
@@ -27,14 +27,14 @@ export default function Layout() {
           type="primary"
           ghost
           onClick={() => {
-            native.getDeviceInfo();
-            const isMobile =
-              window.cashbagSdk?.isAndroid?.() || window.cashbagSdk?.isIOS?.();
-            if (isMobile && typeof window.sdkHandler !== 'undefined') {
-              window.sdkHandler.sendDeviceInfo = function (data) {
-                console.log('sendDeviceInfo: ', data);
-              };
-            }
+            console.log('cashbagSdk: ', window.cashbagSdk);
+            // const isMobile =
+            //   window.cashbagSdk?.isAndroid?.() || window.cashbagSdk?.isIOS?.();
+            // if (isMobile && typeof window.sdkHandler !== 'undefined') {
+            //   window.sdkHandler.sendDeviceInfo = function (data) {
+            //     console.log('sendDeviceInfo: ', data);
+            //   };
+            // }
           }}
         >
           get_device_info
