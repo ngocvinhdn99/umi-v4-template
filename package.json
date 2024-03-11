@@ -3,7 +3,8 @@
   "author": "vanthuan98 <pvthuan1802@gmail.com>",
   "scripts": {
     "dev": "umi dev",
-    "build": "umi build",
+    "build:dev": "umi build",
+    "build:prod": "umi build",
     "postinstall": "umi setup",
     "setup": "umi setup",
     "start": "npm run dev"

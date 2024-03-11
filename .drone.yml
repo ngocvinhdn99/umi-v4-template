@@ -1,0 +1,146 @@
+---
+kind: pipeline
+type: docker
+name: default
+
+# Steps
+steps:
+  # Build
+  - name: build
+    image: cashbag/ubuntu:20.04
+    environment:
+      HARBOR_BASE:
+        from_secret: harbor_base
+      HARBOR_PROJECT:
+        from_secret: harbor_project
+      HARBOR_ROBOT_NAME:
+        from_secret: harbor_robot_name
+      HARBOR_ROBOT_TOKEN:
+        from_secret: harbor_robot_token
+    commands:
+      # Login Harbor
+      - docker login -u $HARBOR_ROBOT_NAME -p $HARBOR_ROBOT_TOKEN $HARBOR_BASE
+
+      # Build
+      - docker build -f Dockerfile$.{DRONE_BRANCH} -t $HARBOR_BASE/$HARBOR_PROJECT/web-webview:latest -t $HARBOR_BASE/$HARBOR_PROJECT/web-webview:${DRONE_COMMIT_SHA} .
+      - docker push $HARBOR_BASE/$HARBOR_PROJECT/web-webview:latest
+      - docker push $HARBOR_BASE/$HARBOR_PROJECT/web-webview:${DRONE_COMMIT_SHA}
+      # Cleaning
+      - docker rmi $HARBOR_BASE/$HARBOR_PROJECT/web-webview:latest
+      - docker rmi $HARBOR_BASE/$HARBOR_PROJECT/web-webview:${DRONE_COMMIT_SHA}
+
+  # Deploy to VPS
+  - name: deploy
+    image: appleboy/drone-ssh
+    settings:
+      host:
+        from_secret: deployment_host
+      username:
+        from_secret: deployment_user
+      key:
+        from_secret: deployment_ssh
+      script:
+        - source deploy/cashbag/cashbag-containers.sh web-webview
+    depends_on:
+      - "build"
+
+  # Notify to working chat group
+  - name: notify
+    when:
+      status:
+        - success
+    image: appleboy/drone-telegram
+    settings:
+      token:
+        from_secret: telegram_token
+      to:
+        from_secret: telegram_room
+      format: html
+      message: >
+        {{#success build.status}}
+          - Service <code>{{repo.name}}</code> deployed
+           Branch: <code>{{commit.branch}}</code> - Author: <code>{{commit.author}}</code>
+           Build #{{build.number}}: <a href='{{build.link}}'>{{build.link}}</a>
+        {{/success}}                        
+    depends_on:
+      - "deploy"
+
+trigger:
+  branch:
+    - develop
+    - release
+
+
+# Secrets
+# GITEA
+---
+kind: secret
+name: gitea_username
+get:
+  path: cashbag/gitea
+  name: username
+---
+kind: secret
+name: gitea_access_token
+get:
+  path: cashbag/gitea
+  name: access_token
+---
+# HARBOR
+kind: secret
+name: harbor_base
+get:
+  path: cashbag/harbor
+  name: base
+---
+kind: secret
+name: harbor_project
+get:
+  path: cashbag_main_${DRONE_BRANCH}/harbor
+  name: project
+---
+kind: secret
+name: harbor_robot_name
+get:
+  path: cashbag_main_${DRONE_BRANCH}/harbor
+  name: robot_name
+---
+kind: secret
+name: harbor_robot_token
+get:
+  path: cashbag_main_${DRONE_BRANCH}/harbor
+  name: robot_token
+
+# DEPLOY
+---
+kind: secret
+name: deployment_host
+get:
+  path: cashbag_${DRONE_BRANCH}/deployment
+  name: host
+---
+kind: secret
+name: deployment_user
+get:
+  path: cashbag_${DRONE_BRANCH}/deployment
+  name: user
+---
+kind: secret
+name: deployment_ssh
+get:
+  path: cashbag_${DRONE_BRANCH}/deployment
+  name: ssh
+
+# TELEGRAM
+---
+kind: secret
+name: telegram_token
+get:
+  path: cashbag/telegram
+  name: token
+---
+kind: secret
+name: telegram_room
+get:
+  path: cashbag_main_${DRONE_BRANCH}/telegram
+  name: room

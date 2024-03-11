@@ -1,0 +1,33 @@
+# Dockerfile References: https://docs.docker.com/engine/reference/builder/
+
+# Start from the latest node base image
+FROM node:20.11-alpine3.19 as builder
+
+# Add Maintainer Info
+LABEL maintainer="Cashbag <dev@cashbag.vn>"
+
+# Set the Current Working Directory inside the container
+WORKDIR /app
+
+# Install ts
+RUN npm install -g typescript
+
+# Copy package.json first, for caching deps
+COPY ./package.json  yarn.lock ./
+RUN yarn --ignore-optional
+
+# Copy data to working dir
+COPY . .
+
+# Build
+RUN yarn run build:prod
+
+# Add to nginx
+FROM nginx
+
+# Expose port
+EXPOSE 4000
+
+# Copy file
+COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
+COPY --from=builder /app/dist /usr/share/nginx/html
