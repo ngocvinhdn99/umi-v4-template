@@ -1,9 +1,12 @@
 const sendMessage = (data: any) => {
   const newData = JSON.stringify(data);
   // ios
-  window?.webkit?.messageHandlers?.jsMessageHandler?.postMessage(newData);
+  const a = window?.webkit?.messageHandlers?.jsMessageHandler?.postMessage(newData);
   // android
-  global?.JSBridge?.sendMessage(newData);
+  const b = global?.JSBridge?.sendMessage(newData);
+
+  console.log('first: ', a);
+  console.log('second: ', b);
 };
 
 const getUserToken = () => {
