@@ -47,7 +47,7 @@ export default function Layout() {
             native.closeNativeWebview();
           }}
         >
-          copy_content
+          close_native_webview
         </Button>
       </div>
     </div>
