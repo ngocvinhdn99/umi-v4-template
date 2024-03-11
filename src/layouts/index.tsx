@@ -9,8 +9,11 @@ export default function Layout() {
         <Button
           type="primary"
           onClick={() => {
-            console.log('cashbagSdk: ', window.cashbagSdk);
-            window.cashbagSdk.sendUserAuthorization();
+            window.partnerHandler.setPlatform = function(data: any) {
+              const result = JSON.parse(data);
+              console.log('result: ', result);
+            };
+            // console.log('cashbagSdk: ', window.cashbagSdk);
             // const isMobile =
             //   window.cashbagSdk?.isAndroid?.() || window.cashbagSdk?.isIOS?.();
             // if (isMobile && typeof window.sdkHandler !== 'undefined') {
