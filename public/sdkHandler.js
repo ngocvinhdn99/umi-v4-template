@@ -17,7 +17,7 @@ var sdkHandler = new (function () {
 
   // subscriber data from web
   window.addEventListener('message', function (event) {
-    tpbanksdk.updateFromNative(event.data);
+    cashbagSdk.updateFromNative(event.data);
   });
 
   this.updateFromDataNative = function (message) {
@@ -43,6 +43,6 @@ var sdkHandler = new (function () {
   };
 
   this.sendDataForNative = function (window, event) {
-    tpbanksdk.sendMessage(window, Request);
+    cashbagSdk.sendMessage(window, Request);
   };
 })();

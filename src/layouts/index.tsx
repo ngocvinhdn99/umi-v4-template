@@ -9,6 +9,7 @@ export default function Layout() {
         <Button
           type="primary"
           onClick={() => {
+            native.getUserToken();
             const isMobile =
               window.cashbagSdk?.isAndroid?.() || window.cashbagSdk?.isIOS?.();
             if (isMobile && typeof window.sdkHandler !== 'undefined') {
@@ -26,6 +27,7 @@ export default function Layout() {
           type="primary"
           ghost
           onClick={() => {
+            native.getDeviceInfo();
             const isMobile =
               window.cashbagSdk?.isAndroid?.() || window.cashbagSdk?.isIOS?.();
             if (isMobile && typeof window.sdkHandler !== 'undefined') {

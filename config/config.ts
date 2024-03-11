@@ -11,4 +11,5 @@ export default defineConfig({
     '@umijs/plugins/dist/model',
     '@umijs/plugins/dist/request',
   ],
+  scripts: ['https://cdn.jsdelivr.net/npm/eruda', 'eruda.init()'],
 });
