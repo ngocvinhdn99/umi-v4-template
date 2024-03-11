@@ -10,6 +10,7 @@ export default function Layout() {
           type="primary"
           onClick={() => {
             console.log('cashbagSdk: ', window.cashbagSdk);
+            window.cashbagSdk.sendUserAuthorization();
             // const isMobile =
             //   window.cashbagSdk?.isAndroid?.() || window.cashbagSdk?.isIOS?.();
             // if (isMobile && typeof window.sdkHandler !== 'undefined') {
