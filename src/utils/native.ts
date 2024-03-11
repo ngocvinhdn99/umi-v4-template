@@ -1,12 +1,9 @@
-const sendMessage = async (data: any) => {
+const sendMessage = (data: any) => {
   const newData = JSON.stringify(data);
   // ios
-  const a = await window?.webkit?.messageHandlers?.jsMessageHandler?.postMessage(newData);
+  window?.webkit?.messageHandlers?.jsMessageHandler?.postMessage(newData);
   // android
-  const b = await global?.JSBridge?.sendMessage(newData);
-
-  console.log('first: ', a);
-  console.log('second: ', b);
+  global?.JSBridge?.sendMessage(newData);
 };
 
 const getUserToken = () => {
