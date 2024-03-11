@@ -17,7 +17,6 @@ var sdkHandler = new (function () {
 
   // subscriber data from web
   window.addEventListener('message', function (event) {
-    console.log('event: ', event);
     cashbagSdk.updateFromNative(event.data);
   });
 

@@ -1,26 +1,25 @@
 import { native } from '@/utils';
 import { Button } from 'antd';
+import { useEffect } from 'react';
 import styles from './index.less';
 
 export default function Layout() {
+  useEffect(() => {
+    window.sendUserAuthorization = (data) => {
+      console.log('sendUserAuthorization: ', data);
+    };
+    window.sendDeviceInfo = (data) => {
+      console.log('sendDeviceInfo: ', data);
+    };
+  }, []);
+
   return (
     <div className={styles.navs}>
       <div style={{ marginBottom: 15 }}>
         <Button
           type="primary"
           onClick={() => {
-            window.partnerHandler.setPlatform = function(data: any) {
-              const result = JSON.parse(data);
-              console.log('result: ', result);
-            };
-            // console.log('cashbagSdk: ', window.cashbagSdk);
-            // const isMobile =
-            //   window.cashbagSdk?.isAndroid?.() || window.cashbagSdk?.isIOS?.();
-            // if (isMobile && typeof window.sdkHandler !== 'undefined') {
-            //   window.sdkHandler.sendUserAuthorization = function (data) {
-            //     console.log('sendUserAuthorization: ', data);
-            //   };
-            // }
+            native.getUserToken();
           }}
         >
           get_user_token
@@ -31,14 +30,7 @@ export default function Layout() {
           type="primary"
           ghost
           onClick={() => {
-            console.log('sdkHandler: ', window.sdkHandler);
-            // const isMobile =
-            //   window.cashbagSdk?.isAndroid?.() || window.cashbagSdk?.isIOS?.();
-            // if (isMobile && typeof window.sdkHandler !== 'undefined') {
-            //   window.sdkHandler.sendDeviceInfo = function (data) {
-            //     console.log('sendDeviceInfo: ', data);
-            //   };
-            // }
+            native.getDeviceInfo();
           }}
         >
           get_device_info
