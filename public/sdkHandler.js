@@ -16,10 +16,10 @@ var sdkHandler = new (function () {
   };
 
   // subscriber data from web
-  window.addEventListener('message', function (event) {
-    console.log('event: ', event);
-    cashbagSdk.updateFromNative(event.data);
-  });
+  // window.addEventListener('message', function (event) {
+  //   console.log('event: ', event);
+  //   cashbagSdk.updateFromNative(event.data);
+  // });
 
   this.updateFromDataNative = function (message) {
     // TODO process data received from native and web tpbank
@@ -33,7 +33,7 @@ var sdkHandler = new (function () {
 
   this.updateConfirmResponse = function (message) {
     // TODO process data received from native and web tpbank
-    alert(message);
+    // alert(message);
   };
 
   this.setPlatform = function (message) {

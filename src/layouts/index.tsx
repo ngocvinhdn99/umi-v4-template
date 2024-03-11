@@ -27,7 +27,7 @@ export default function Layout() {
           type="primary"
           ghost
           onClick={() => {
-            console.log('cashbagSdk: ', window.cashbagSdk);
+            console.log('sdkHandler: ', window.sdkHandler);
             // const isMobile =
             //   window.cashbagSdk?.isAndroid?.() || window.cashbagSdk?.isIOS?.();
             // if (isMobile && typeof window.sdkHandler !== 'undefined') {
