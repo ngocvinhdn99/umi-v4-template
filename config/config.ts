@@ -11,6 +11,13 @@ export default defineConfig({
     '@umijs/plugins/dist/model',
     '@umijs/plugins/dist/request',
   ],
-  headScripts: ['cashbag-sdk.min.js', 'sdkHandler.js'],
+  headScripts: [
+    {
+      src: 'cashbag-sdk.min.js',
+    },
+    {
+      src: 'sdkHandler.js',
+    },
+  ],
   scripts: ['https://cdn.jsdelivr.net/npm/eruda', 'eruda.init()'],
 });
