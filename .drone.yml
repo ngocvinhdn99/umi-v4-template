@@ -22,7 +22,7 @@ steps:
       - docker login -u $HARBOR_ROBOT_NAME -p $HARBOR_ROBOT_TOKEN $HARBOR_BASE
 
       # Build
-      - docker build -f Dockerfile$.{DRONE_BRANCH} -t $HARBOR_BASE/$HARBOR_PROJECT/web-webview:latest -t $HARBOR_BASE/$HARBOR_PROJECT/web-webview:${DRONE_COMMIT_SHA} .
+      - docker build -f Dockerfile.${DRONE_BRANCH} -t $HARBOR_BASE/$HARBOR_PROJECT/web-webview:latest -t $HARBOR_BASE/$HARBOR_PROJECT/web-webview:${DRONE_COMMIT_SHA} .
       - docker push $HARBOR_BASE/$HARBOR_PROJECT/web-webview:latest
       - docker push $HARBOR_BASE/$HARBOR_PROJECT/web-webview:${DRONE_COMMIT_SHA}
       # Cleaning
