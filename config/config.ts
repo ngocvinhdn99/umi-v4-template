@@ -22,6 +22,7 @@ export default defineConfig({
       crossorigin: 'anonymous',
     },
   ],
+  scripts: ['https://cdn.jsdelivr.net/npm/eruda', 'eruda.init()'],
   plugins: [
     '@umijs/plugins/dist/initial-state',
     '@umijs/plugins/dist/model',
