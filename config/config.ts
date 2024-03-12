@@ -13,6 +13,9 @@ export default defineConfig({
   },
   hash: true,
   ignoreMomentLocale: true,
+  legacy: {
+    nodeModulesTransform: false,
+  },
   links: [
     {
       href: 'https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css',
@@ -22,7 +25,6 @@ export default defineConfig({
       crossorigin: 'anonymous',
     },
   ],
-  scripts: ['https://cdn.jsdelivr.net/npm/eruda', 'eruda.init()'],
   plugins: [
     '@umijs/plugins/dist/initial-state',
     '@umijs/plugins/dist/model',
