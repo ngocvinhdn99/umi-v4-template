@@ -1,9 +1,20 @@
+import { ILoading } from '@/interfaces';
+import { ITestState } from '@/models/test';
 import { native } from '@/utils';
 import { Button } from 'antd';
 import { useEffect } from 'react';
-import styles from './index.less';
+import { Dispatch, connect } from 'umi';
 
-export default function Layout() {
+interface Props {
+  dispatch: Dispatch;
+  testModel: ITestState;
+  loading: ILoading;
+}
+
+const Layout = (props: Props) => {
+  const { testModel, dispatch, loading } = props;
+  const { name } = testModel;
+
   useEffect(() => {
     window.sendUserAuthorization = (data) => {
       console.log('sendUserAuthorization: ', data);
@@ -11,10 +22,11 @@ export default function Layout() {
     window.sendDeviceInfo = (data) => {
       console.log('sendDeviceInfo: ', data);
     };
+    console.log('1');
   }, []);
 
   return (
-    <div className={styles.navs}>
+    <div style={{ padding: 20 }}>
       <div style={{ marginBottom: 15 }}>
         <Button
           type="primary"
@@ -48,6 +60,21 @@ export default function Layout() {
           close_native_webview
         </Button>
       </div>
+      <div style={{ marginBottom: 15 }}>
+        <Button
+          type="primary"
+          onClick={() => {
+            native.openAffiliateFromUrl('https://shope.ee/8A8POENJHk');
+          }}
+        >
+          open_affiliate_from_url
+        </Button>
+      </div>
     </div>
   );
-}
+};
+
+export default connect(({ testModel, loading }) => ({
+  testModel,
+  loading,
+}))(Layout);

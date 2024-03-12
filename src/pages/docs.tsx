@@ -1,4 +1,6 @@
 const DocsPage = () => {
+  console.log('2');
+
   return (
     <div>
       <p>This is umi docs.</p>

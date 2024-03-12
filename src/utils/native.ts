@@ -24,8 +24,19 @@ const closeNativeWebview = () => {
   });
 };
 
+const openAffiliateFromUrl = (url: string) => {
+  if (!url) {
+    return;
+  }
+  sendMessage({
+    type: 'open_affiliate_from_url',
+    value: url,
+  });
+};
+
 export default {
   getUserToken,
   getDeviceInfo,
   closeNativeWebview,
+  openAffiliateFromUrl,
 };
