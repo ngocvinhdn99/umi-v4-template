@@ -36,6 +36,10 @@ const Layout = (props: Props) => {
     };
   }, []);
 
+  function sendUserAuthorization(data) {
+    console.log('data: ', data);
+  }
+
   return (
     <div style={{ padding: 20 }}>
       <div style={{ marginBottom: 15 }}>
