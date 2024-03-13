@@ -22,7 +22,18 @@ const Layout = (props: Props) => {
     window.sendDeviceInfo = (data) => {
       console.log('sendDeviceInfo: ', data);
     };
-    console.log('1');
+    global.window.sendUserAuthorization = (data) => {
+      console.log('sendUserAuthorization: ', data);
+    };
+    global.window.sendDeviceInfo = (data) => {
+      console.log('sendDeviceInfo: ', data);
+    };
+    globalThis.window.sendUserAuthorization = (data) => {
+      console.log('sendUserAuthorization: ', data);
+    };
+    globalThis.window.sendDeviceInfo = (data) => {
+      console.log('sendDeviceInfo: ', data);
+    };
   }, []);
 
   return (
