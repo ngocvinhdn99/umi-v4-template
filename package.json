@@ -1,0 +1,22 @@
+{
+  "private": true,
+  "author": "Huynh Ngoc Vinh <vinh.selly@gmail.com>",
+  "scripts": {
+    "dev": "umi dev",
+    "build": "umi build",
+    "postinstall": "umi setup",
+    "setup": "umi setup",
+    "start": "npm run dev"
+  },
+  "dependencies": {
+    "umi": "^4.1.2"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.66",
+    "@types/react-dom": "^18.2.22",
+    "@umijs/plugins": "^4.1.2",
+    "antd": "^5.15.3",
+    "tailwindcss": "^3",
+    "typescript": "^5.4.2"
+  }
+}
